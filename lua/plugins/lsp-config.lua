@@ -1,5 +1,6 @@
 return {
   {
+    --downloads lsps
     "williamboman/mason.nvim",
     lazy = false,
     config = function()
@@ -7,6 +8,7 @@ return {
     end,
   },
   {
+    --integrates mason and lspconfig
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     opts = {
@@ -17,6 +19,7 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     config = function()
+      --pull in nvim cmp deps
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
@@ -33,6 +36,9 @@ return {
         capabilites = capabilities,
       })
       lspconfig.texlab.setup({
+        capabilities = capabilities,
+      })
+      lspconfig.clangd.setup({
         capabilities = capabilities,
       })
 
