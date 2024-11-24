@@ -17,6 +17,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = "saghen/blink.cmp",
 		lazy = false,
 		opts = {
 			inlay_hints = {
@@ -25,7 +26,12 @@ return {
 		},
 		config = function()
 			--pull in nvim cmp deps
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			}
 
 			local lspconfig = require("lspconfig")
 			-- lspconfig.tsserver.setup({
@@ -84,6 +90,8 @@ return {
 			lspconfig.zls.setup({
 				capabilities = capabilities,
 			})
+
+			require("ufo").setup()
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
