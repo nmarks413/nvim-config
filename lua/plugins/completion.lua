@@ -6,7 +6,7 @@ return {
 		dependencies = "rafamadriz/friendly-snippets",
 
 		-- use a release tag to download pre-built binaries
-		version = "v0.*",
+		version = "*",
 		-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = 'cargo build --release',
 		-- If you use nix, you can build from source using latest nightly rust with:
@@ -18,52 +18,44 @@ return {
 
 			keymap = { preset = "super-tab" },
 
-			highlight = {
-				-- sets the fallback highlight groups to nvim-cmp's highlight groups
-				-- useful for when your theme doesn't support blink.cmp
-				-- will be removed in a future release, assuming themes add support
-				use_nvim_cmp_as_default = true,
-			},
 			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 			-- adjusts spacing to ensure icons are aligned
-			nerd_font_variant = "mono",
-
-			-- experimental auto-brackets support
-			accept = { auto_brackets = { enabled = true } },
-
-			-- experimental signature help support
-			trigger = {
-				signature_help = { enabled = true },
-				completion = { show_in_snippet = false },
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "mono",
 			},
 
-			sources = {
-				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer", "lazydev" },
+			completion = {
+				trigger = {
+					show_in_snippet = false,
 				},
+				accept = { auto_brackets = { enabled = true } },
 
-				providers = {
-					-- dont show LuaLS require statements when lazydev has items
-					lsp = { fallback_for = { "lazydev" } },
-					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-				},
-			},
-
-			windows = {
 				documentation = {
 					auto_show = true,
 				},
 
-				autocomplete = {
-					selection = "preselect",
+				list = {
+					selection = { preselect = true },
 				},
 
-				ghost_text = {
-					enabled = false,
+				ghost_text = { enabled = false },
+			},
+
+			-- experimental signature help support
+			signature = { enabled = true },
+
+			sources = {
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+
+				providers = {
+					-- dont show LuaLS require statements when lazydev has items
+					lsp = { fallbacks = { "lazydev" } },
+					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
 				},
 			},
 		},
 
-		opts_extend = { "sources.completion.enabled_providers" },
+		opts_extend = { "sources.default" },
 	},
 }

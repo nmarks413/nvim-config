@@ -26,7 +26,7 @@ return {
 		},
 		config = function()
 			--pull in nvim cmp deps
-			local capabilities = require("blink.cmp").get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
@@ -34,9 +34,6 @@ return {
 			}
 
 			local lspconfig = require("lspconfig")
-			-- lspconfig.tsserver.setup({
-			-- 	capabilites = capabilities,
-			-- })
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
@@ -72,9 +69,6 @@ return {
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.typst_lsp.setup({
-				capabilities = capabilities,
-			})
 			lspconfig.denols.setup({
 				capabilities = capabilities,
 			})
@@ -84,9 +78,6 @@ return {
 			lspconfig.basedpyright.setup({
 				capabilities = capabilities,
 			})
-			-- lspconfig.jedi_language_server.setup({
-			-- 	capabilities = capabilities,
-			-- })
 			lspconfig.zls.setup({
 				capabilities = capabilities,
 			})
