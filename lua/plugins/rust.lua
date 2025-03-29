@@ -12,6 +12,7 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended
+		enabled = true,
 		lazy = false,
 		config = function()
 			vim.g.rustaceanvim = {

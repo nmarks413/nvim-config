@@ -8,7 +8,6 @@ return {
 			vim.cmd.colorscheme("catppuccin")
 			require("catppuccin").setup({
 				integrations = {
-					alpha = true,
 					blink_cmp = true,
 					fidget = true,
 					gitsigns = true,
@@ -18,7 +17,6 @@ return {
 					mini = true,
 					-- navic = { enabled = true, custom_bg = "lualine" },
 					-- neotest = true,
-					neotree = true,
 					-- noice = true,
 					-- notify = true,
 					semantic_tokens = true,

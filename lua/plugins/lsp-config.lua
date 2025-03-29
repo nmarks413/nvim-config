@@ -60,6 +60,34 @@ return {
 					},
 				},
 			})
+
+			-- lspconfig.rust_analyzer.setup({
+			-- 	on_attach = function(client, bufnr)
+			-- 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			-- 	end,
+			-- 	settings = {
+			-- 		["rust-analyzer"] = {
+			-- 			diagnostics = {
+			-- 				enable = true,
+			-- 			},
+			-- 			imports = {
+			-- 				granularity = {
+			-- 					group = "module",
+			-- 				},
+			-- 				prefix = "self",
+			-- 			},
+			-- 			cargo = {
+			-- 				buildScripts = {
+			-- 					enable = true,
+			-- 				},
+			-- 			},
+			-- 			procMacro = {
+			-- 				enable = true,
+			-- 			},
+			-- 		},
+			-- 	},
+			-- 	capabilities = capabilities,
+			-- })
 			lspconfig.nil_ls.setup({
 				capabilities = capabilities,
 			})
@@ -85,8 +113,6 @@ return {
 			require("ufo").setup()
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
 			vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, {})
 			vim.keymap.set("n", "<leader>th", function()
@@ -96,7 +122,6 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			-- your configuration comes here
 			-- or leave it empty to use the default settings

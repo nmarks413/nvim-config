@@ -6,6 +6,7 @@ return {
 			require("mini.surround").setup()
 			require("mini.cursorword").setup()
 			require("mini.move").setup()
+			require("mini.icons").setup()
 		end,
 	},
 	{

@@ -22,6 +22,7 @@ return {
 				cpp = { "clang-format " },
 				c = { "clang-format" },
 				python = { "ruff_format" },
+				haskell = { "ormolu" },
 			},
 		})
 	end,

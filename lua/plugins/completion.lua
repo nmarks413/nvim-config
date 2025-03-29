@@ -18,6 +18,10 @@ return {
 
 			keymap = { preset = "super-tab" },
 
+			cmdline = {
+				enabled = true,
+			},
+
 			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 			-- adjusts spacing to ensure icons are aligned
 			appearance = {
@@ -27,7 +31,7 @@ return {
 
 			completion = {
 				trigger = {
-					show_in_snippet = false,
+					show_in_snippet = true,
 				},
 				accept = { auto_brackets = { enabled = true } },
 
@@ -45,12 +49,14 @@ return {
 			-- experimental signature help support
 			signature = { enabled = true },
 
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+
 			sources = {
 				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 
 				providers = {
 					-- dont show LuaLS require statements when lazydev has items
-					lsp = { fallbacks = { "lazydev" } },
+					-- lsp = { fallbacks = { "lazydev" } },
 					lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
 				},
 			},
