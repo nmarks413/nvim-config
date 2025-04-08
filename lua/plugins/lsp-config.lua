@@ -61,33 +61,6 @@ return {
 				},
 			})
 
-			-- lspconfig.rust_analyzer.setup({
-			-- 	on_attach = function(client, bufnr)
-			-- 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-			-- 	end,
-			-- 	settings = {
-			-- 		["rust-analyzer"] = {
-			-- 			diagnostics = {
-			-- 				enable = true,
-			-- 			},
-			-- 			imports = {
-			-- 				granularity = {
-			-- 					group = "module",
-			-- 				},
-			-- 				prefix = "self",
-			-- 			},
-			-- 			cargo = {
-			-- 				buildScripts = {
-			-- 					enable = true,
-			-- 				},
-			-- 			},
-			-- 			procMacro = {
-			-- 				enable = true,
-			-- 			},
-			-- 		},
-			-- 	},
-			-- 	capabilities = capabilities,
-			-- })
 			lspconfig.nil_ls.setup({
 				capabilities = capabilities,
 			})
@@ -95,6 +68,9 @@ return {
 				capabilities = capabilities,
 			})
 			lspconfig.clangd.setup({
+				capabilities = capabilities,
+			})
+			lspconfig.nixd.setup({
 				capabilities = capabilities,
 			})
 			lspconfig.denols.setup({
