@@ -25,6 +25,9 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 vim.opt.spell = false
 vim.opt.spelllang = { "en_us" }
 
+vim.o.winborder = "rounded"
+vim.diagnostic.config({ virtual_text = true })
+
 --commands for adding things to spellchecker
 --[[
     :set spell – Turn on spell checking
