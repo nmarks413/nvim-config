@@ -28,6 +28,27 @@ return {
 			--pull in nvim cmp deps
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+			local flake_path = (
+				vim.uv.os_uname().sysname == "Darwin" and "/Users/nmarks/.dotfiles" or "/home/nmarks/.dotfiles"
+			)
+
+			local attribute = (
+				vim.uv.os_uname().sysname == "Darwin" and "darwinConfigurations.Natalies-MacBook-Air"
+				or "nixosConfigurations.nixos"
+			)
+
+			local nixos_options = '(builtins.getFlake "' .. flake_path .. '" ).nixosConfigurations.nixos.options'
+
+			local home_options = '(builtins.getFlake "'
+				.. flake_path
+				.. '").'
+				.. attribute
+				.. ".options.home-manager.users.type.getSubOptions [ ]"
+
+			local darwin_options = '(builtins.getFlake "' .. flake_path .. '").' .. attribute .. ".options"
+
+			local nixpkgs_path = 'import (builtins.getFlake "' .. flake_path .. '").inputs.nixpkgs { }'
+
 			capabilities.textDocument.foldingRange = {
 				dynamicRegistration = false,
 				lineFoldingOnly = true,
@@ -76,17 +97,20 @@ return {
 				settings = {
 					nixd = {
 						nixpkgs = {
-							expr = "import <nixpkgs> { }",
+							expr = nixpkgs_path,
 						},
 						formatting = {
 							command = { "nixfmt" },
 						},
 						options = {
 							nixos = {
-								expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.k-on.options',
+								expr = nixos_options,
 							},
 							home_manager = {
-								expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."ruixi@k-on".options',
+								expr = home_options,
+							},
+							nix_darwin = {
+								expr = darwin_options,
 							},
 						},
 					},
@@ -168,5 +192,24 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"mhanberg/output-panel.nvim",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("output_panel").setup({
+				max_buffer_size = 5000, -- default
+			})
+		end,
+		cmd = { "OutputPanel" },
+		keys = {
+			{
+				"<leader>o",
+				vim.cmd.OutputPanel,
+				mode = "n",
+				desc = "Toggle the output panel",
+			},
+		},
 	},
 }
