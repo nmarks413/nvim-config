@@ -21,7 +21,7 @@ return {
 			replace_netrw = true,
 		},
 		image = {
-			enabled = true,
+			enabled = false,
 		},
 		picker = {
 			sources = {
